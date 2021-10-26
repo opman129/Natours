@@ -24,6 +24,7 @@ exports.updateOne = (Model) => async (req, res, next) => {
     };
 };
 
+/** Fetch All Documents */
 exports.find = (Model) => async (req, res, next) => {
     try {
         const features = new ApiFeatures(Model.find().lean(), req.query)
@@ -33,10 +34,21 @@ exports.find = (Model) => async (req, res, next) => {
             .paginate();
 
         const doc = await features.query;
-
         const message = 'Documents retrieved successfully';
         return responseHandler(res, doc, next, 200, message, doc.length);
     } catch (error) {
         return res.status(500).json({ message: 'Fail', error: error.message });
     };
 };
+
+/** Find One Document */
+exports.findOne = (Model) => async (req, res, next) => {
+    try {
+        const doc = await Model.findById(req.params.id).lean();
+        if (!doc) return errorHandler(404, `The document with the given Id not found`);
+        return responseHandler(res, doc, next, 200, 'Document retrieved successfully', 1);
+    } catch (error) {
+        return res.status(500).json({ message: 'Fail', error: error.message });
+    };
+};
+

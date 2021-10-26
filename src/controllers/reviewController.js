@@ -68,7 +68,6 @@ exports.deleteTourReview = async (req, res, next) => {
     try {
         const { review_id } = req.params;
         const review = await Review.findByIdAndDelete(review_id);
-        console.log(review)
         const message = 'Review deleted successfully';
         return responseHandler(res, null, next, 200, message, null);
     } catch (error) {
