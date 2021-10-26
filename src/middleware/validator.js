@@ -1,5 +1,7 @@
 const errorHandler = require("../utils/errorHandler");
 const AppError = require('../utils/AppError');
+const Tour = require("../models/tour");
+const Review = require("../models/reviews");
 
 exports.checkIfUserIsAdmin = (req, res, next) => {
     if (req.user && req.user.roles != "admin") {
@@ -29,3 +31,13 @@ exports.checkIfUserIsReviewCreator = (req, res, next) => {
     };
     next();
 };
+
+// exports.convertDocToModel = async (req, res, next) => {
+//     const doc = await Review.find();
+//     if (doc) {
+//         const val = doc.map((el) => {
+//            return el.review
+//         });
+//         console.log(val)
+//     };
+// };

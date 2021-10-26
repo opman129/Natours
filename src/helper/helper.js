@@ -52,6 +52,7 @@ exports.findOne = (Model) => async (req, res, next) => {
     };
 };
 
+/** Create A New Document */
 exports.createOne = (Model) => async (req, res, next) => {
     try {
         const doc = await Model.create(req.body);
@@ -59,5 +60,5 @@ exports.createOne = (Model) => async (req, res, next) => {
         return responseHandler(res, doc, next, 200, message, 1);
     } catch (error) {
         return res.status(500).json({ message: 'Fail', error: error.message });
-    }
-}
+    };
+};
