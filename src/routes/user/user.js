@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { getUsers, getUser, updateUser, deleteMe, deleteUser } = require('../../controllers/userController');
+const { getUsers, getUser, updateUser, deleteMe, deleteUser, getMe } = require('../../controllers/userController');
 const { protect } = require('../../middleware/protect');
 const { checkIfUserIsAdmin } = require('../../middleware/validator');
 
@@ -7,6 +7,8 @@ router.get('/users', getUsers);
 
 router.route('/users/:user_id')
     .get(getUser)
+
+router.get('/me', protect, getMe);
 
 router.patch('/updateMe', protect, updateUser);
 

@@ -88,5 +88,11 @@ exports.deleteMe = async (req, res, next) => {
     };
 };
 
+/** Get SELF */
+exports.getMe = (req, res, next) => {
+    req.params.id = req.user.id;
+    next();
+};
+
 /** Helper DeleteONE Function */
 exports.deleteUser = helper.deleteOne(User);

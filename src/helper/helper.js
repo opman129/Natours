@@ -52,6 +52,19 @@ exports.findOne = (Model) => async (req, res, next) => {
     };
 };
 
+/** Find A Document with the populate option in use */
+exports.fetchOne = (Model, popOptions) => async (req, res, next) => {
+    try {
+        let query = Model.findById(req.params.id);
+        if(popOptions) query = query.populate(popOptions);
+        const doc = await query;
+        if (!doc) return errorHandler(404, `The document with the given Id not found`);
+        return responseHandler(res, doc, next, 200, 'Document retrieved successfully', 1);
+    } catch (error) {
+        return res.status(500).json({ message: 'Fail', error: error.message });
+    };
+};
+
 /** Create A New Document */
 exports.createOne = (Model) => async (req, res, next) => {
     try {

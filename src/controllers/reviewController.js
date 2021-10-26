@@ -59,11 +59,6 @@ exports.fetchSingleReviewForATour = async (req, res, next) => {
     };
 };
 
-/** Helper Function */
-// exports.deleteReview = helper.deleteOne(Review);
-
-exports.updateReview = helper.updateOne(Review);
-
 exports.deleteTourReview = async (req, res, next) => {
     try {
         const { review_id } = req.params;
@@ -74,3 +69,11 @@ exports.deleteTourReview = async (req, res, next) => {
         return res.status(400).json({ success: false, error: error.message });
     };
 };
+
+/** ------------------- Helper Functions ----------------- 
+ * All functions work well
+*/
+
+// exports.deleteReview = helper.deleteOne(Review);
+exports.updateReview = helper.updateOne(Review);
+exports.getReview = helper.fetchOne(Review, { path: 'tour', select: 'name' });
