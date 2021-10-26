@@ -1,0 +1,41 @@
+[
+    {
+        "title": "Johannesburg Tour",
+        "duration": 30,
+        "maxGroupSize": 15,
+        "difficulty": "medium",
+        "price": 458,
+        "summary": "Exciting & Fun",
+        "rating": 5,
+        "description": "Lorem Ipsum dolo mogus egus Christi",
+        "imageCover": "image01.jpg",
+        "images": ["jump.jpg", "arsenal.jpg"],
+        "startDates": ["2021-07-07"]
+    },
+    {
+        "title": "Southy Tour",
+        "duration": 45,
+        "maxGroupSize": 12,
+        "difficulty": "easy",
+        "price": 250,
+        "summary": "Decryption in summary",
+        "rating": 4.5,
+        "description": "Lovable experience, fun all through",
+        "imageCover": "sqidward.jpg",
+        "images": ["jump.jpg", "arsenal.jpg"],
+        "startDates": ["2021-11-09"]
+    },
+    {
+        "title": "Asian Tour",
+        "duration": 25,
+        "maxGroupSize": 25,
+        "difficulty": "hard",
+        "price": 500,
+        "summary": "Essays in summary",
+        "rating": 4.9,
+        "description": "Lovable experience, fun all through",
+        "imageCover": "sqidward.jpg",
+        "images": ["jump.jpg", "arsenal.jpg"],
+        "startDates": ["2021-12-25"]
+    }
+]

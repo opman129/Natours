@@ -1,0 +1,16 @@
+[
+    {
+        "fullname": "Jokotagba Opemipo",
+        "email": "opemipojokotagba@gmail.com",
+        "password": "qwerty123",
+        "passwordConfirm": "qwerty123",
+        "photo": "image001.jpg"
+    },
+    {
+        "fullname": "Mega Functions",
+        "email": "opemipo@woodcoreapp.com",
+        "password": "qwerty123",
+        "passwordConfirm": "qwerty123",
+        "photo": "image04.jpg"
+    }
+]
