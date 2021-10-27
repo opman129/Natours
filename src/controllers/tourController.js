@@ -53,7 +53,7 @@ class TourController {
     static async getTour (req, res, next) {
         try {
             const query = { _id: req.params.tour_id };
-            const tour = await Tour.findOne(query).populate('reviews');
+            const tour = await Tour.findOne(query).populate('reviews', '_id review rating user -tour');
             if(!tour) {
                 return errorHandler(404, "Tour with the given Id does not exist");
             };
