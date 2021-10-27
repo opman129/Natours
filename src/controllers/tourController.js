@@ -40,6 +40,7 @@ class TourController {
                 return errorHandler(404, 'No Tours Found');
             };
     
+            console.log(req.query);
             const message = "Tours retrieved successfully";
             return responseHandler(res, tours, next, 200, message, record);
         } catch (error) {

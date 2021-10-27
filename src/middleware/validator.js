@@ -10,8 +10,8 @@ exports.checkIfUserIsAdmin = (req, res, next) => {
     return next();
 };
 
-exports.checkIfUserIsTourGuide = (req, res, next) => {
-    if (req.user && req.user.roles != "guide") {
+exports.checkIfUserIsAdminTourGuide = (req, res, next) => {
+    if (req.user && req.user.roles != "guide" || req.user.roles != "admin") {
         return errorHandler(403, "You are forbidden from performing this action");
     };
     return next();
