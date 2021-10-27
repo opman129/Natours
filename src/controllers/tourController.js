@@ -34,6 +34,7 @@ class TourController {
                 .limit()
                 .paginate();
             const tours = await features.query
+            /** N/B: You can use .explain() to get details about a query from the database */
 
             const record = tours.length;
             if (record < 0) {

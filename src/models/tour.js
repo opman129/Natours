@@ -185,5 +185,8 @@ tourSchema.pre('save', function (next) {
     next();
 });
 
+/** STATIC METHOD TO CALCULATE RATINGSAVERAGE */
+ 
+
 const Tour = mongoose.model("Tour", tourSchema)
 module.exports = Tour;
