@@ -34,6 +34,9 @@ const reviewSchema = mongoose.Schema({
     toObject: { virtuals: true }
 });
 
+/** Index so a user can only review a tour once */
+reviewSchema.index({ tour: 1, user: 1 },  { unique: true });
+
 /** Query Middleware */
 reviewSchema.pre(/^find/, function (next) {
     this.populate({
