@@ -33,7 +33,7 @@ class TourController {
                 .sort()
                 .limit()
                 .paginate();
-            const tours = await features.query.explain()
+            const tours = await features.query
 
             const record = tours.length;
             if (record < 0) {
