@@ -6,7 +6,7 @@ const { checkIfUserIsAdmin } = require('../../middleware/validator');
 router.get('/users', getUsers);
 
 router.route('/users/:user_id')
-    .get(getUser)
+    .get(getUser);
 
 router.get('/me', protect, getMe);
 
