@@ -11,11 +11,11 @@ class TourController {
         try {
             const created_at = DateTime.now().toBSON();
             const { title, duration, maxGroupSize, difficulty, ratingsAverage,
-                    ratingsQuantity, rating, price, discount, summary, description,
+                    price, discount, summary, description,
                     imageCover, images, startDates, secretTour } = req.body;
 
             const tour = await Tour.create({ title, duration, maxGroupSize, difficulty, ratingsAverage,
-                ratingsQuantity, rating, price, discount, summary, description,
+                price, discount, summary, description,
                 imageCover, images, startDates, created_at, secretTour });
             const message = 'Tour created successfully';
 

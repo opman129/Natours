@@ -145,6 +145,8 @@ tourSchema.virtual('reviews', {
 /** Document Middleware -PRE AND POST HOOKS 
  * There are 4 types of Middleware in Mongoose namely:
  * Document, Query, Aggregate and Model Middleware
+ * 
+ * NOTE: The post middleware does not get access to next()
 */
 // PRE only runs on .save() and .create() commands
 
