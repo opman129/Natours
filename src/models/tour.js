@@ -1,4 +1,3 @@
-const { DateTime } = require('luxon');
 const mongoose = require('mongoose');
 const slugify = require('slugify');
 const validator = require('validator');
@@ -125,6 +124,10 @@ const tourSchema = mongoose.Schema({
     toJSON: { virtuals: true },
     toObject: { virtuals: true }
 });
+
+/** Indexes - Allows for better READ 
+ *  performance on queried fields    */
+tourSchema.index({ price: 1, ratingsAverage: -1 });
 
 /** Virtual Properties */
 tourSchema.virtual('durationWeeks').get(function() {
