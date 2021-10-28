@@ -166,7 +166,7 @@ tourSchema.pre(/^find/, function (next) {
     next();
 });
 
-/** Aggregation Middleware */
+/** Aggregation Middleware - Find Tour that are not secret tours */
 tourSchema.pre('aggregate', function(next) {
     this.pipeline().unshift({ $match: { secretTour: { $ne: true } } })
     next();
@@ -181,7 +181,7 @@ tourSchema.pre(/^find/, function (next) {
     next();
 });
 
-/** Document Middleware */
+/** Document Middleware - Update the updated_at field */
 tourSchema.pre('save', function (next) {
     now = new Date();
     this.updated_at = now;
@@ -190,9 +190,6 @@ tourSchema.pre('save', function (next) {
     };
     next();
 });
-
-/** STATIC METHOD TO CALCULATE RATINGSAVERAGE */
- 
 
 const Tour = mongoose.model("Tour", tourSchema)
 module.exports = Tour;

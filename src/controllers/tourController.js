@@ -184,7 +184,7 @@ class TourController {
 
             const tours = await Tour.find({ 
                 startLocation: { $geoWithin: { $centerSphere: [[lng, lat], radius] } } });
-            return responseHandler(res, tour, next, 200, 'Tours closest to you retrieved successfully', tours.length);
+            return responseHandler(res, tours, next, 200, 'Tours closest to you retrieved successfully', tours.length);
         } catch (error) {
             return res.status(400).json({ success: 'fail', err: error.message});
         };
