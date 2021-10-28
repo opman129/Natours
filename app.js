@@ -38,13 +38,13 @@ app.use("*", cors());
 app.use(mongoSanitize());
 app.use(xss());
 
-/** Prevent Parameter Pollution */
+/** Prevent Parameter Pollution - Use on Fields in Schema Definition */
 app.use(hpp({
     whitelist: [
         'duration',
         'ratingsQuantity',
         'ratingsAverage'
-    ]
+    ],
 }));
 
 /** ----------- Static Files ------------ */

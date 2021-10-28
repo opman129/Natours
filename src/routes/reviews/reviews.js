@@ -12,6 +12,7 @@ router.get('/tours/:tour_id/reviews/:review_id', protect, Review.fetchSingleRevi
 router.patch('/tours/:tour_id/reviews/:id', protect, checkIfUserIsReviewCreator, Review.updateReview);
 
 // router.delete('/tours/:tour_id/reviews/:review_id', protect, checkIfUserIsReviewCreator, Review.deleteReview);
+
 /** Delete Tour Review */
 router.delete('/tours/:tour_id/reviews/:review_id', protect, Review.deleteTourReview);
 

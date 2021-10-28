@@ -97,9 +97,9 @@ userSchema.pre(/^find/, function (next) {
 const User = mongoose.model("User", userSchema);
 module.exports = User;
 
-/** MODELLING DATA
+/** DATA MODELLING 
  * 
- * ONE TO ONE
- * ONE TO MANY
- * MANY TO MANY
+ * ONE TO ONE RELATIONSHIPS
+ * ONE TO MANY RELATIONSHIPS
+ * MANY TO MANY RELATIONSHIPS
  */

@@ -31,13 +31,3 @@ exports.checkIfUserIsReviewCreator = (req, res, next) => {
     };
     next();
 };
-
-// exports.convertDocToModel = async (req, res, next) => {
-//     const doc = await Review.find();
-//     if (doc) {
-//         const val = doc.map((el) => {
-//            return el.review
-//         });
-//         console.log(val)
-//     };
-// };

@@ -71,7 +71,7 @@ exports.deleteTourReview = async (req, res, next) => {
 };
 
 /** ------------------- Helper Functions ----------------- 
- * All functions work well
+ * All functions work well with the use of helper functioins
 */
 
 // exports.deleteReview = helper.deleteOne(Review);
