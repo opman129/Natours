@@ -33,7 +33,6 @@ app.use('/v1', limiter);
 /** Import Router */
 const router = require('./src/routes/index');
 
-
 /** Middlewares */
 app.use(express.json({ limit: '20000kb' }));
 app.use(router);
