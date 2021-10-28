@@ -196,6 +196,8 @@ class TourController {
             const [lat, lng] = latlng.split(',');
             if (!lat || !lng) return errorHandler(400, "Please provide a latitude and longitude");
 
+            const multiplier = unit === 'mi' ? 0.000621371 : 0.001;
+
             const distances = await Tour.aggregate([
                 {
                     $geoNear: {
@@ -203,7 +205,14 @@ class TourController {
                             type: 'Point',
                             coordinates: Number[lng, lat]
                         },
-                        distanceField: 'distance'
+                        distanceField: 'distance',
+                        distanceMultiplier: multiplier
+                    }
+                },
+                {
+                    $project: {
+                        distance: 1,
+                        name: 1
                     }
                 }
             ]) 
