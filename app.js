@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const cors = require('cors');
 const rateLimit = require("express-rate-limit");
@@ -6,6 +7,13 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+
+/** Templating Engine */
+app.set('view engine', 'pug');
+// app.set('views', `${__dirname}/views`) /**One Mehtod of doing it */
+app.set('views', path.join(__dirname, 'views'));
+/** ----------- Static Files ------------ */
+app.use(express.static(path.join(__dirname), 'public'));
 
 /** Set Security HTTP headers */
 app.use(helmet());
@@ -46,8 +54,5 @@ app.use(hpp({
         'ratingsAverage'
     ],
 }));
-
-/** ----------- Static Files ------------ */
-app.use(express.static(`${__dirname}/public`));
 
 module.exports = { app };
