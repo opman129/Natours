@@ -1,6 +1,6 @@
 const express = require('express');
-const path = require('path');
 const app = express();
+const path = require('path');
 const cors = require('cors');
 const rateLimit = require("express-rate-limit");
 const helmet = require('helmet');
@@ -13,7 +13,7 @@ app.set('view engine', 'pug');
 // app.set('views', `${__dirname}/views`) /**One Mehtod of doing it */
 app.set('views', path.join(__dirname, 'views'));
 /** ----------- Static Files ------------ */
-app.use(express.static(path.join(__dirname), 'public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 /** Set Security HTTP headers */
 app.use(helmet());

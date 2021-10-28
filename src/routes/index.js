@@ -9,6 +9,12 @@ router.use('/v1', tour);
 router.use('/v1', user);
 router.use('/v1', review);
 
+
+/** -------- Server Side Rendering Routes ---------- */
+app.get('/', (req, res) => {
+    res.status(200).render(base);
+});
+
 router.get('/', (req, res) => {
     res.status(200).json({
         status: 'success',
