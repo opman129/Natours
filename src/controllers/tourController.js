@@ -189,6 +189,30 @@ class TourController {
             return res.status(400).json({ success: 'fail', err: error.message});
         };
     };
+
+    static async getDistances (req, res, next) {
+        try {
+            const { latlng, unit } = req.params;
+            const [lat, lng] = latlng.split(',');
+            if (!lat || !lng) return errorHandler(400, "Please provide a latitude and longitude");
+
+            const distances = await Tour.aggregate([
+                {
+                    $geoNear: {
+                        near: {
+                            type: 'Point',
+                            coordinates: Number[lng, lat]
+                        },
+                        distanceField: 'distance'
+                    }
+                }
+            ]) 
+                
+            return responseHandler(res, distances, next, 200, 'Tours closest to you retrieved successfully');
+        } catch (error) {
+            return res.status(400).json({ success: 'fail', err: error.message});
+        };
+    };
 };
 
 module.exports = TourController; 

@@ -167,10 +167,12 @@ tourSchema.pre(/^find/, function (next) {
 });
 
 /** Aggregation Middleware - Find Tour that are not secret tours */
-tourSchema.pre('aggregate', function(next) {
-    this.pipeline().unshift({ $match: { secretTour: { $ne: true } } })
-    next();
-});
+// tourSchema.pre('aggregate', function(next) {
+//     this.pipeline().unshift({ $match: { secretTour: { $ne: true } } })
+
+//     console.log(this.pipeline())
+//     next();
+// });
 
 /** For Populating Fields */
 tourSchema.pre(/^find/, function (next) {

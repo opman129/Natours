@@ -22,7 +22,10 @@ router.get('/monthly-stats/:year', Tour.getMonthlyPlan);
 router.use('/tours/:tour_id/reviews', reviewRouter);
 
 /** Geospatial Queries Route */
-router.route('/tours-within/:distance/center/:latlng/unit/:unit')
+router.route('/tours/tours-within/:distance/center/:latlng/unit/:unit')
     .get(Tour.getTourWithin)
+
+router.route('/tours/distances/:latlng/unit/:unit')
+    .get(Tour.getDistances)
 
 module.exports = router;
