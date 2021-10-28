@@ -1,8 +1,23 @@
 doctype html
 html 
     head
-        title Natours Experience
+        meta(name="viewport" content='width-device-width, initial-scale=1.0')
+        meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        title Natours Experience | Exciting Tours For Adventerous People
+        link(rel="stylesheet", href="css/style.css")
+        link(rel='shortcut icon' type='image/png' href='img/favico.pngn')
+        link(rel='stylesheet' href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap")
+    
+    body
+        //- Header
+        header.header
+            nav.nav.nav--tours
+                a.nav__el(href="#") All tours
+            .header__logo
+                img(src="img/logo-white.png", alt="Natours Logo")  
+            nav.nav.nav--user
+                a.nav__el(href="#") My Bookings
+                a.nav__el(href="#")
+                    img(src="img/user.jpg", alt="User Photo") 
 
-    body 
-        h1 The Park Camper
-        p This is just some text
+

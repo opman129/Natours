@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif
+}
+
+h1 {
+    font-size: 1rem;
+}
+
+p {
+    font-weight: lighter;
+}

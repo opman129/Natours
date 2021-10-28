@@ -8,6 +8,9 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 
+/** ------------- NGROK ----------------- */
+const ngrok = require('ngrok');
+
 /** Templating Engine */
 app.set('view engine', 'pug');
 // app.set('views', `${__dirname}/views`) /**One Mehtod of doing it */
