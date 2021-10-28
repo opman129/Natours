@@ -171,6 +171,23 @@ class TourController {
         } catch (error) {
             return res.status(400).json({ success: 'fail', err: error.message});
         };
+    };
+
+    /** Geospatial Query controller function */
+    static async getTourWithin (req, res, next) {
+        try {
+            const { distance, latlng, unit } = req.params;
+            const [lat, lng] = latlng.split(',');
+            const radius = unit === 'mi' ? distance / 3963.2 : distance / 6378.1;
+
+            if (!lat || !lng) return errorHandler(400, "Please provide a latitude and longitude");
+
+            const tours = await Tour.find({ 
+                startLocation: { $geoWithin: { $centerSphere: [[lng, lat], radius] } } });
+            return responseHandler(res, tour, next, 200, 'Tours closest to you retrieved successfully', tours.length);
+        } catch (error) {
+            return res.status(400).json({ success: 'fail', err: error.message});
+        }
     }
 };
 
