@@ -65,7 +65,9 @@ exports.updateUser = async (req, res, next) => {
         if (req.body.passowrd || req.body.passwordConfirm) {
             return errorHandler(400, "This route is not for password Update. Use the defined route for that purpose.")
         }
-        const filteredBody = filterObj(req.body, 'name', 'email')
+        const filteredBody = filterObj(req.body, 'name', 'email');
+        if (req.file) filteredBody.photo = req.file.filename;
+
         const user = await User.findByIdAndUpdate(req.user._id, filteredBody, {
             new: true, runValidators: true
         });
