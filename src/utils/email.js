@@ -40,7 +40,7 @@ module.exports = class Email {
             to: this.to,
             subject,
             html,
-            text: htmlToText.fromString(html)
+            text: htmlToText.htmlToText(html)
         };
 
         /** Create Transport */

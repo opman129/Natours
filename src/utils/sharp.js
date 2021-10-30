@@ -1,5 +1,5 @@
 const sharp = require('sharp');
-const catchAsync = require('../utils/catchAsync');
+const { catchAsync } = require('../utils/catchAsync');
 
 /** ------------ IMAGE PROCESSING FOR NODE.JS ------------- */
 

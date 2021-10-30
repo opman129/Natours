@@ -29,7 +29,7 @@ exports.uploadUserProfilePhoto = upload.single('photo');
 /** Upload Multiple Images */
 exports.uploadTourImages = upload.fields([
     { name: 'imageCover', maxCount: 1 },
-    { name: 'images', maxCount: 3 }
+    { name: 'images', maxCount: 3 },
 ]);
 
 /** If only 1 field exists for multiple Image uploads, use
