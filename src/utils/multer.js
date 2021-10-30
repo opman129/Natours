@@ -10,14 +10,16 @@ const AppError = require('../utils/AppError');
 */
 const multerStorage = multer.memoryStorage();
 
+/** Filter Images */
 const multerFilter = (req, file, cb) => {
-    if (file.minetype.startsWith('image')) {
+    if (file.mimetype.startsWith('image')) {
         cb(null, true);
     } else {
         cb (new AppError('Not an Image, Please Upload only images', 400), false)
     };
 };
 
+/** Initialize Multer Image Upload */
 const upload = multer({
     storage: multerStorage,
     fileFilter: multerFilter
