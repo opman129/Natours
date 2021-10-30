@@ -33,5 +33,5 @@ exports.uploadTourImages = upload.fields([
 ]);
 
 /** If only 1 field exists for multiple Image uploads, use
- *  upload.array('<fieldName>', <maxCount>)
+ *  upload.array([{'<fieldName>', <maxCount>}])
  */

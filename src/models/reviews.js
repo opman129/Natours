@@ -47,12 +47,10 @@ reviewSchema.pre(/^find/, function (next) {
 });
 
 /** Document Middleware */
-reviewSchema.pre('save', function (next) {
-    now = new Date(Date.now());
-    this.updated_at = now;
-    if ( !this.created_at) {
-        this.created_at = now;
-    };
+reviewSchema.post(/^findOneAndUpdate/, async function (next) {
+    const review = this.review;
+    review.updated_at = Date.now();
+    await review.save({ validateBeforeSave: false })
     next();
 });
 
