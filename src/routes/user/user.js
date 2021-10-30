@@ -4,6 +4,7 @@ const { protect } = require('../../middleware/protect');
 const { checkIfUserIsAdmin } = require('../../middleware/validator');
 const { uploadUserProfilePhoto } = require('../../utils/multer');
 const { resizeUserImage } = require('../../utils/sharp');
+const { getIpAddress } = require('../../middleware/requestIp');
 
 router.get('/users', getUsers);
 

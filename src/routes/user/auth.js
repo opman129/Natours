@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const User = require('../../controllers/authController');
 const { protect } = require('../../middleware/protect');
+const { getIpAddress } = require('../../middleware/requestIp');
 
-router.post('/register', User.registerUser);
+router.post('/register', getIpAddress, User.registerUser);
 router.post('/login', User.loginUser);
 
 router.post('/forgot-password', User.forgotPassword);

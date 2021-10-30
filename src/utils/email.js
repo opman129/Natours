@@ -6,7 +6,7 @@ require('dotenv').config();
 module.exports = class Email {
     constructor(user, url) {
         this.to = user.email;
-        this.firstName = user.name.split(' ')[0];
+        this.firstName = user.fullname.split(' ')[0];
         this.url = url;
         this.from = `Opemipo Jokotagba A. <${process.env.EMAIL_FROM}>`
     };
