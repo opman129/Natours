@@ -53,7 +53,7 @@ module.exports = class Email {
     };
 };
 
-/** ------------------ INITIAL IMPLEMENTATION ----------------- */
+/** ------------------ INITIAL IMPLEMENTATION OF EMAIL ----------------- */
 
 // const sendEmail = async (options) => {
 //     /** Create Transporter - MailTrap for Development */
