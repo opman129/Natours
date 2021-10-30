@@ -8,14 +8,16 @@ module.exports = class Email {
         this.to = user.email;
         this.firstName = user.name.split(' ')[0];
         this.url = url;
-        this.from = `Opemipo Jokotagba A <${process.env.EMAIL_FROM}>`
+        this.from = `Opemipo Jokotagba A. <${process.env.EMAIL_FROM}>`
     };
 
+    /** Email Handler Transport */
     newTransport() {
         if (process.env.NODE_ENV === 'production') {
             /* Sendgrid Email Handler In Production */
             return 1; // return value
         }
+        /** MailTrap Email Configuration For Development Purposes */
         return nodemailer.createTransport({
             host: process.env.EMAIL_HOST,
             port: process.env.EMAIL_PORT,
@@ -27,7 +29,7 @@ module.exports = class Email {
     };
 
     async send(template, subject) {
-        /** Render HTML based on a PUG template */
+        /** Render HTML for email based on a PUG template */
         const html = pug.renderFile(`${__dirname}/../views/emails/${template}.pug`, {
             firstName: this.firstName,
             url: this.url,
@@ -49,7 +51,7 @@ module.exports = class Email {
     };
 
     async sendWelcome () {
-        await this.send('welcome', 'Welcome to the Natours Family')
+        await this.send('welcome', 'Welcome to the Natours Family');
     };
 };
 
