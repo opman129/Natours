@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config({ path: './.env' });
 const signToken = require('../middleware/token');
 const crypto = require('crypto');
-const sendEmail = require('../utils/email');
+const Email = require('../utils/email');
 
 class AuthController {
     static async registerUser(req, res, next) {
@@ -15,6 +15,9 @@ class AuthController {
             const user = await User.create({
                 fullname, email, photo, password, passwordConfirm, created_at });
 
+            let url = `${req.protocol}://${req.get('host')}/me`;
+            console.log(url);
+            await new Email(user, url).sendWelcome();
             const message = "User created successfully";
             // const token = signToken({ id: user._id });
             return responseHandler(res, user, next, 201, message, 1);
