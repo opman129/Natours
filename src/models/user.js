@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
     },
     photo: {
         type: String,
-        default: 'avatar.jpg'
+        default: ``
     },
     roles: {
         type: String,
@@ -87,7 +87,7 @@ userSchema.methods.createPasswordResetToken = function() {
     return token;
 };
 
-/** Find only active users */
+/** Find only active users - Query Middleware*/
 userSchema.pre(/^find/, function (next) {
     this.find({ active: { $ne: false } });
     next();
@@ -102,4 +102,5 @@ module.exports = User;
  * ONE TO ONE RELATIONSHIPS
  * ONE TO MANY RELATIONSHIPS
  * MANY TO MANY RELATIONSHIPS
+ * ONE TO TON RELATIONSHIPS
  */
