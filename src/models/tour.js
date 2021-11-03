@@ -128,7 +128,7 @@ const tourSchema = mongoose.Schema({
 });
 
 /** Indexes - Allows for better READ 
- *  performance on queried fields    */
+ *  performance on frequently queried fields    */
 tourSchema.index({ price: 1, ratingsAverage: -1 });
 tourSchema.index({ slug: 1 });
 /** Geospatial Indexing*/
@@ -166,7 +166,7 @@ tourSchema.pre(/^find/, function (next) {
     next();
 });
 
-/** Aggregation Middleware - Find Tour that are not secret tours */
+/** Aggregation Middleware - Find Tours that are not secret tours */
 // tourSchema.pre('aggregate', function(next) {
 //     this.pipeline().unshift({ $match: { secretTour: { $ne: true } } })
 

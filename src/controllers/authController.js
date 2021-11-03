@@ -15,9 +15,8 @@ class AuthController {
             const user = await User.create({
                 fullname, email, photo, password, passwordConfirm, created_at });
 
-            // let url = `${req.protocol}://${req.get('host')}/me`;
-            // console.log(url);
-            // await new Email(user, url).sendWelcome();
+            let url = `${req.protocol}://${req.get('host')}/me`;
+            await new Email(user, url).sendWelcome();
             const message = "User created successfully";
             // const token = signToken({ id: user._id });
             return responseHandler(res, user, next, 201, message, 1);
@@ -71,18 +70,11 @@ class AuthController {
             await user.save({ validateBeforeSave: false });
 
             const resetURL = `${req.protocol}://${req.get('host')}/v1/reset-password/${token}`;
-
             const message = 'Password reset token successfully sent to your email address';
-            const emailMessage = `Forgot Password? Create a new pasword an submit your request to
-            : ${resetURL}. \nIf you did not request for a password reset, kindly ignore this message`;
 
             console.log(token);
             try {
-                await sendEmail({
-                    email: user.email,
-                    subject: 'Your password reset token is valid for 10 mins',
-                    emailMessage
-                });
+                await new Email(user, resetURL).sendPasswordReset();
             } catch (error) {
                 await user.save({ validateBeforeSave: false });
                 return res.status(500).json({ message: 'Fail', error: error.message });
