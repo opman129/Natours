@@ -3,6 +3,7 @@ const auth = require('./user/auth');
 const tour = require('./tour/tour');
 const user = require('./user/user');
 const review = require('./reviews/reviews');
+const bookings = require('./bookings/bookings');
 const base = require('./frontend/base');
 
 /** -------- Server Side Rendering Routes ---------- */
@@ -13,6 +14,7 @@ router.use('/v1', auth);
 router.use('/v1', tour);
 router.use('/v1', user);
 router.use('/v1', review);
+router.use('/v1', bookings);
 
 /** -------- Base API Route ----------- */
 router.get('/', (req, res) => {
