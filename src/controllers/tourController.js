@@ -173,7 +173,7 @@ class TourController {
         };
     };
 
-    /** Geospatial Query controller function */
+    /** Geospatial Query controller function to get tours within a specific location */
     static async getTourWithin (req, res, next) {
         try {
             const { distance, latlng, unit } = req.params;
