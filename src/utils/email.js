@@ -15,7 +15,13 @@ module.exports = class Email {
     newTransport() {
         if (process.env.NODE_ENV === 'production') {
             /* Sendgrid Email Handler In Production */
-            return 1; // return value
+            return nodemailer.createTransport({
+                service: 'SendGrid',
+                auth: {
+                    user: process.env.SENDGRID_USERNAME,
+                    pass: process.env.SENDGRID_PASSWORD
+                }
+            }) // return value
         }
         /** MailTrap Email Configuration For Development Purposes */
         return nodemailer.createTransport({
