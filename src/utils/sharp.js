@@ -21,7 +21,6 @@ exports.resizeUserImage = catchAsync(async (req, res, next) => {
 /** -------------- Resize Tour/Product Images -------------- */
 exports.resizeTourImages = catchAsync(async (req, res, next) => {
     if (!req.files.imageCover || !req.files.images) return next();
-    console.log(req.files)
 
     /** Cover Image */
     req.body.imageCover = `tour-${req.params.tour_id}-${Date.now()} - cover.jpeg`
@@ -36,7 +35,7 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
     req.body.images = [];
 
     await Promise.all(req.files.images.map(async (file, i) => {
-        const filename = `tour-${req.params.tour_id}-${Date.now()}-${i + 1}.jpeg}`
+        const filename = `tour-${req.params.tour_id}-${Date.now()}-${i + 1}.jpeg}`;
 
         await sharp(file.buffer)
             .resize(2000, 1333)
@@ -45,8 +44,7 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
             .toFile(`${__dirname}/../public/img/tours/${filename}`);
 
         req.body.images.push(filename);
-    })
-    );
+    }));
 
     next();
 });
