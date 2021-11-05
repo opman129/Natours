@@ -3,6 +3,7 @@ const responseHandler = require('../utils/responseHandler');
 const errorHandler = require('../utils/errorHandler');
 const ApiFeatures = require('../utils/ApiFeatures');
 const helper = require('../helper/helper');
+const { cache, clearHash, exec } = require('../utils/redis');
 
 /** Function to check and update User Object in the database */
 const filterObj = (obj, ...allowedFields) => {
@@ -15,7 +16,7 @@ const filterObj = (obj, ...allowedFields) => {
 
 exports.getUsers = async (req, res, next) => {
     try {
-        const features = new ApiFeatures(User.find(), req.query)
+        const features = new ApiFeatures(User.find(), req.query, cache)
             .filter()
             .sort()
             .limit()
@@ -32,7 +33,7 @@ exports.getUsers = async (req, res, next) => {
 
 exports.getUser = async (req, res, next) => {
     try {
-        const user = await User.findById(req.params.user_id);
+        const user = await User.findById(req.params.user_id, cache);
         if(!user) {
             return errorHandler(404, 'User with the given ID does not exist');
         };

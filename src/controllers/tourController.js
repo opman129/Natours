@@ -5,6 +5,7 @@ const { DateTime } = require('luxon');
 const ApiFeatures = require('../utils/ApiFeatures');
 const AppError = require('../utils/AppError');
 require('dotenv').config({ path: './.env' });
+const { cache, clearHash, exec } = require('../utils/redis');
 
 class TourController {
     static async createTour (req, res, next) {
@@ -28,7 +29,7 @@ class TourController {
     /** Fetch All Tours */
     static async getTours (req, res, next) {
         try {
-            const features = new ApiFeatures(Tour.find().lean(), req.query)
+            const features = new ApiFeatures(Tour.find().lean(), req.query, cache)
                 .filter()
                 .sort()
                 .limit()
@@ -41,7 +42,6 @@ class TourController {
                 return errorHandler(404, 'No Tours Found');
             };
     
-            console.log(req.query);
             const message = "Tours retrieved successfully";
             return responseHandler(res, tours, next, 200, message, record);
         } catch (error) {
