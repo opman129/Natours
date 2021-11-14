@@ -3,7 +3,6 @@ const responseHandler = require('../utils/responseHandler');
 const errorHandler = require('../utils/errorHandler');
 const { DateTime } = require('luxon');
 const ApiFeatures = require('../utils/ApiFeatures');
-const AppError = require('../utils/AppError');
 require('dotenv').config({ path: './.env' });
 const { cache, clearHash, exec } = require('../utils/redis');
 

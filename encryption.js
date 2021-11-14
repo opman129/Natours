@@ -10,7 +10,7 @@ const key = crypto.randomBytes(3).toString('hex');
 const token = `POS-${hash}-${key}`.toUpperCase();
 
 console.log(token);
-if (token.split('-')[0] !== 'POS') console.log('not pos')
+if (token.split('-')[0] !== 'POS') console.log('not pos');
 
 /** Generate Random Keys with randomUUID() method */
 const reference = crypto.randomUUID();

@@ -2,8 +2,6 @@ const Tour = require('../models/tour');
 const Booking = require('../models/bookings');
 require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SK);
-const { catchAsync } = require("../utils/catchAsync");
-const errorHandler = require('../utils/errorHandler');
 const responseHandler = require('../utils/responseHandler');
 
 exports.getCheckoutSession = async (req, res, next) => {
