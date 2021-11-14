@@ -5,19 +5,23 @@ const { DateTime } = require('luxon');
 const ApiFeatures = require('../utils/ApiFeatures');
 require('dotenv').config({ path: './.env' });
 const { cache, clearHash, exec } = require('../utils/redis');
+const agenda = require('../jobs/agenda');
 
 class TourController {
     static async createTour (req, res, next) {
         try {
             const created_at = DateTime.now().toBSON();
+            const startDate = new Date(Date.now())
             const { title, duration, maxGroupSize, difficulty, ratingsAverage,
                     price, discount, summary, description,
                     imageCover, images, startDates, secretTour } = req.body;
 
-            const tour = await Tour.create({ title, duration, maxGroupSize, difficulty, ratingsAverage,
-                price, discount, summary, description,
+            const tour = await Tour.create({ title, duration, maxGroupSize, difficulty, 
+                price, discount, summary, description, ratingsAverage,
                 imageCover, images, startDates, created_at, secretTour });
             const message = 'Tour created successfully';
+
+            await agenda.schedule(tour.created_at, 'fetchAllTours', { tour_id })
 
             return responseHandler(res, tour, next, 201, message, 1);
         } catch (error) {
