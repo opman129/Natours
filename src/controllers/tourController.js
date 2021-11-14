@@ -21,7 +21,7 @@ class TourController {
                 imageCover, images, startDates, created_at, secretTour });
             const message = 'Tour created successfully';
 
-            await agenda.schedule(tour.created_at, 'fetchAllTours', { tour_id })
+            // agenda.now(tour.created_at, 'fetchAllTours', { _id: tour.id })
 
             return responseHandler(res, tour, next, 201, message, 1);
         } catch (error) {
