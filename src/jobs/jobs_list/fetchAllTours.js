@@ -7,7 +7,7 @@ module.exports = async function (agenda) {
         console.log('Fetching tours');
         try {
             const { tour_id } = job.attrs.data;
-            console.log(job.attrs.data);
+            console.log(tour_id);
             await Tour.findByIdAndUpdate(tour_id, { $set: { difficulty: 'medium' }}, 
                 { new: true });
             
