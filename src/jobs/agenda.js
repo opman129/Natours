@@ -1,4 +1,5 @@
 const Agenda = require('agenda');
+const os = require('os');
 require('dotenv').config({ path: './.env' });
 
 /** Create Configuration File That Connects To The Database */
@@ -8,13 +9,13 @@ const agenda = new Agenda({
         collection: 'jobs',
         options: {
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
         }
     },
+    name: 'Tour Queue'
 });
 
-/** List The Different JobTypes Available In The Project */
-const jobTypes = ["fetchAllTours"];
+const jobTypes = process.env.JOB_TYPES ? process.env.JOB_TYPES.split(",") : [];
 
 /** loop through the job_list folder and pass in the agenda instance to 
  * each job so that it has access to its API. */
@@ -24,10 +25,8 @@ jobTypes.forEach(type => {
     require('./jobs_list/' + type)(agenda);
 });
 
-console.log(jobTypes)
-
 if(jobTypes.length) {
-    // if there are jobs in the jobsTypes array set up 
+    // if there are jobs in the jobsTypes array set up and start
     agenda.on('ready', async () => 
     await agenda.start());
 };
