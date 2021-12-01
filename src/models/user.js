@@ -45,7 +45,7 @@ const userSchema = mongoose.Schema({
             validator: function (el) {
                 return el === this.password;
             },
-            message: 'Please ensure your passwords are the same'
+            message: 'Please ensure that your passwords are the same'
         },
     },
     lastLoginDate: {

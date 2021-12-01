@@ -5,6 +5,7 @@ const user = require('./user/user');
 const review = require('./reviews/reviews');
 const bookings = require('./bookings/bookings');
 const base = require('./frontend/base');
+const AppError = require('../utils/AppError');
 
 /** -------- Server Side Rendering Routes ---------- */
 router.use('/', base);
@@ -25,10 +26,11 @@ router.get('/', (req, res) => {
 });
 
 router.all('*', (req, res, next) => {
-    res.status(404).json({
-        success: false,
-        message: `${req.originalUrl} was not found on this platform`
-    });
+    // const err = new Error(`${req.originalUrl} was not found on this platform`);
+    // err.statusCode = err.statusCode || 404;
+    // err.status = 'Fail'
+
+    next(new AppError(`${req.originalUrl} was not found on this platform`, 404));
 });
 
 module.exports = router;

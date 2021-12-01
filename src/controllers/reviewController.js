@@ -3,6 +3,8 @@ const Tour = require('../models/tour');
 const responseHandler = require('../utils/responseHandler');
 const errorHandler = require('../utils/errorHandler');
 const helper = require('../helper/helper');
+const { catchAsync } = require('../utils/catchAsync');
+const AppError = require('../utils/AppError');
 
 exports.createReview = async (req, res, next) => {
     try {
@@ -48,21 +50,25 @@ exports.fetchReviewsForATour = async (req, res, next) => {
     };
 };
 
-exports.fetchSingleReviewForATour = async (req, res, next) => {
-    try {
-        const { tour_id, review_id } = req.params;
-        const review = await Review.findById(tour_id, review_id);
+exports.fetchSingleReviewForATour = catchAsync( async (req, res, next) => {
+        const { review_id } = req.params;
+        const review = await Review.findById(review_id);
+        
+        if (!review) {
+            return next(new AppError('Review with given Id not found', 404));
+        };
         const message = 'Review for tour successfully retrieved';
         return responseHandler(res, review, next, 200, message, 1);
-    } catch (error) {
-        return res.status(400).json({ success: false, error: error.message });
-    };
-};
+});
 
 exports.deleteTourReview = async (req, res, next) => {
     try {
         const { review_id } = req.params;
         const review = await Review.findByIdAndDelete(review_id);
+
+        if (!review) {
+            return next(new AppError('Review with given Id not found', 404));
+        };
         const message = 'Review deleted successfully';
         return responseHandler(res, null, next, 200, message, null);
     } catch (error) {

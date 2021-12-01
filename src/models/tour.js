@@ -185,7 +185,7 @@ tourSchema.pre(/^find/, function (next) {
 
 /** Document Middleware - Update the updated_at field */
 tourSchema.pre('save', function (next) {
-    now = new Date();
+    let now = new Date();
     this.updated_at = now;
     if ( !this.created_at) {
         this.created_at = now;

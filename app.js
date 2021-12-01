@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const globalErrorHandler = require('./src/middleware/globalErrorHandler');
 
 /** ------------- NGROK ----------------- */
 const ngrok = require('ngrok');
@@ -55,6 +56,9 @@ app.use(hpp({
         'ratingsQuantity',
         'ratingsAverage'
     ],
-}));
+})); 
+
+/** Global Error Handler */
+app.use(globalErrorHandler);
 
 module.exports = { app };
