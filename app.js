@@ -42,6 +42,8 @@ app.use(express.json({ limit: '20000kb' }));
 app.use(router);
 app.use(cors());
 app.use("*", cors());
+/** Global Error Handler */
+app.use(globalErrorHandler);
 
 /** Data Sanitization againt NoSQL query Injection
  * & Data Sanitization against XSS
@@ -57,8 +59,5 @@ app.use(hpp({
         'ratingsAverage'
     ],
 })); 
-
-/** Global Error Handler */
-app.use(globalErrorHandler);
 
 module.exports = { app };

@@ -26,10 +26,6 @@ router.get('/', (req, res) => {
 });
 
 router.all('*', (req, res, next) => {
-    // const err = new Error(`${req.originalUrl} was not found on this platform`);
-    // err.statusCode = err.statusCode || 404;
-    // err.status = 'Fail'
-
     next(new AppError(`${req.originalUrl} was not found on this platform`, 404));
 });
 
