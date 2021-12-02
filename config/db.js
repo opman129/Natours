@@ -10,7 +10,8 @@ const connectDB = async () => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  console.log(`MongoDb Connected to ${conn.connections[0].name} successfully`);
+  // console.log(`MongoDb Connected to ${conn.connections[0].name} successfully`);
+  console.log(`MongoDB connected to ${conn.connection.host} successfully`);
 };
 
 module.exports = connectDB;

@@ -25,7 +25,7 @@ class TourController {
 
             return responseHandler(res, tour, next, 201, message, 1);
         } catch (error) {
-            return res.status(400).json({ success: false, error: error.message });
+            return res.status(500).json({ status: 'Fail', error: error.message })
         };
     };
 
@@ -48,7 +48,7 @@ class TourController {
             const message = "Tours retrieved successfully";
             return responseHandler(res, tours, next, 200, message, record);
         } catch (error) {
-            return res.status(400).json({ success: false, error: error.message });
+            return next(new AppError(error.message, error.statusCode));
         };
     };
 
@@ -218,7 +218,7 @@ class TourController {
                         name: 1
                     }
                 }
-            ]) 
+            ]); 
                 
             return responseHandler(res, distances, next, 200, 'Tours closest to you retrieved successfully');
         } catch (error) {
