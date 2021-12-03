@@ -37,8 +37,43 @@ let next_payment = date;
 const next_payment_date = calculateNextPayment('weekly', next_payment);
 console.log(next_payment_date.format('YYYY-MM-DD hh:mm a'));
 
-// const date = Date.now();
-// const current_date = moment(date);
+/** Calculate Monthly Payment */
+function monthlyPayment(pv, freq, rate, periods) {
+    rate = rate / 100 / freq;
+    
+    const x = Math.pow(1 + rate, periods);
+    return (pv * x * rate) / (x - 1);
+}
 
-// const next_payment = current_date.add(7, 'days').format('YYYY-MM-DD hh:mm a');
-// console.log(next_payment);
+console.log(parseInt(monthlyPayment(5000, 2, 10, 1)).toFixed(2));
+
+/***********************************************
+  *  Convert to currency notation               *
+  ***********************************************/
+ function toCurrency(num) {
+    let curr;
+    num = Math.round(num * 100) * 0.01;
+    const currstring = num.toString();
+    if (currstring.match(/\./)) {
+        curr = currstring.split('.');
+    } else {
+        curr = [currstring, "00"];
+    }
+    curr[1] += "00";
+    curr[2] = "";
+    let returnval = "";
+    const length = curr[0].length;
+    
+    // add 0 to decimal if necessary
+    for (let i = 0; i < 2; i++) 
+        curr[2] += curr[1].substr(i, 1);
+ 
+    // insert commas for readability
+    for (i = length; (i - 3) > 0; i = i - 3) {
+        returnval = "," + curr[0].substr(i - 3, 3) + returnval;
+    }
+    returnval = curr[0].substr(0, i) + returnval + "." + curr[2];
+    return(returnval);
+};
+
+console.log(toCurrency(50000000))
