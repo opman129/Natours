@@ -23,8 +23,7 @@ exports.checkIfRoleIsUser = (req, res, next) => {
 exports.checkIfUserIsReviewCreator = async (req, res, next) => {
     const { id } = req.params;
     const review = await Review.findById(id);
-    console.log(req.user._id, review.user._id)
-    if (req.user && req.user._id !== review.user._id)
-    // console.log(req.user._id)
+
+    if (req.user._id !== review.user._id)
     return next(new AppError('You are not the creator of this review', 403));
 };

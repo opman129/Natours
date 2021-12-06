@@ -14,6 +14,6 @@ router.get('/tours/:tour_id/reviews/:review_id', protect, Review.fetchSingleRevi
 router.patch('/tours/:tour_id/reviews/:id', protect, checkIfUserIsReviewCreator, Review.updateReview);
 
 /** Delete Tour Review */
-router.delete('/tours/:tour_id/reviews/:review_id', protect, checkIfUserIsReviewCreator, Review.deleteTourReview);
+router.delete('/tours/:tour_id/reviews/:id', protect, checkIfUserIsReviewCreator, Review.deleteTourReview);
 
 module.exports = router;
