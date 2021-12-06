@@ -7,7 +7,8 @@ const responseHandler = require('../utils/responseHandler');
 exports.getCheckoutSession = async (req, res, next) => {
     try {
         /** Get Currently Booked Tour */
-        const tour = await Tour.findById(req.params.tour_id);
+        const { tour_id } = req.params;
+        const tour = await Tour.findById(tour_id);
         
         /** Create session as response - STRIPE INTEGRATION WORKs NOW*/
         const session = await stripe.checkout.sessions.create({
