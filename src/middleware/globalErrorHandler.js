@@ -4,11 +4,11 @@ const multer = require('multer');
 const handleDuplicateFieldsError = (err) => {
     const value = err.message.match(/(["'])(?:\\.|[^\\])*?\1/)[0];
     return new AppError(`${value.replace(/"/g, '')} already exists. Please use something else.`, 409);
-}
+};
 
 const handleCastError = () => {
     return new AppError(`We are unable to find what you are looking for!`, 404);
-}
+};
 
 const handleValidationError = (err) => {
     const errors = Object.values(err.errors).map(el => el.message);
@@ -16,31 +16,31 @@ const handleValidationError = (err) => {
         let value = Object.values(err.errors)[0].value instanceof Object && Object.values(err.errors)[0].value.constructor.name
         return new AppError(`Invalid input data. ${value || Object.values(err.errors)[0].value} is an invalid input type for ${Object
             .values(err.errors)[0].path}`)
-    }
+    };
     return new AppError(`Invalid Input Data. ${errors.join('. ')}`, 422);
-}
+};
 
 const handleJwtError = () => {
     return new AppError('An error occured. Please login again', 401);
-}
+};
 
 const handleTokenExpiredError = () => {
     return new AppError('You have been logged out of the application, please login again.', 401);
-}
+};
 
 const handleFileNotFoundError = () => {
     return new AppError('The file you intended to delete does not exist', 400);
-}
+};
 
 const handleMulterError = (err) => {
     return new AppError(err.message, 400);
-}
+};
 
 const handleAxiosError = (err) => {
     const message = err.response && err.response.data ? err.response.data.message : "There was an error completing this request."
     const status = err.response ? err.response.status : 400;
     return new AppError(message, status)
-}
+};
 
 
 const sendErrorDev = (err, res) => {

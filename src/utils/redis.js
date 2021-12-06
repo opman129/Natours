@@ -4,8 +4,9 @@ const redisUrl = 'redis://127.0.0.1:6379';
 const client = redis.createClient(redisUrl);
 const { promisify } = require('util');
 client.hget = promisify(client.hget);
-const exec = mongoose.Query.prototype.exec;
 
+/** Mongoose Queries for MongoDB */
+const exec = mongoose.Query.prototype.exec;
 const cache = mongoose.Query.prototype.cache;
 
 mongoose.Query.prototype.cache = function (options = {}) {
@@ -40,6 +41,7 @@ mongoose.Query.prototype.exec = async function () {
     return result;
 };
 
+/** Function to clear cached Items */
 function clearHash(hashKey) {
     client.del(JSON.stringify(hashKey));
 };
