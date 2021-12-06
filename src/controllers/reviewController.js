@@ -6,19 +6,15 @@ const helper = require('../helper/helper');
 const { catchAsync } = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
 
-exports.createReview = async (req, res, next) => {
-    try {
-        const tour = req.params.tour_id;
-        const user = req.user._id;
-        const { review, rating } = req.body;
-        if (!user) return errorHandler(400, 'User with the given Id does not exist');
-        const newReview = await Review.create({ user, tour, review, rating });
-        const message = 'Review created successfully';
-        return responseHandler(res, newReview, next, 201, message, 1);
-    } catch (error) {
-        return res.status(400).json({ success: false, error: error.message });
-    };
-};
+exports.createReview = catchAsync(async (req, res, next) => {
+    const tour = req.params.tour_id;
+    const user = req.user._id;
+    const { review, rating } = req.body;
+    if (!user) return errorHandler(400, 'User with the given Id does not exist');
+    const newReview = await Review.create({ user, tour, review, rating });
+    const message = 'Review created successfully';
+    return responseHandler(res, newReview, next, 201, message, 1);
+});
 
 /** Fetch All Review - Not used mostly in Production */
 // exports.fetchAllReviews = async (req, res, next) => {
