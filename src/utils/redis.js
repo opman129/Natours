@@ -42,7 +42,7 @@ mongoose.Query.prototype.exec = async function () {
     };
 
     const result = await exec.apply(this, arguments);
-    client.hset(this.hashKey, key, JSON.stringify(result), 'EX', 60 * 60 * 24);
+    client.hset(this.hashKey, key, JSON.stringify(result));
 
     return result;
 };

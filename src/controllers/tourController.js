@@ -23,7 +23,6 @@ class TourController {
 
             agenda.schedule("in 1 minute", "fetchAllTours", { tour_id: tour._id })
 
-            clearHash(req.user._id);
             return responseHandler(res, tour, next, 201, message, 1);
         } catch (error) {
             return res.status(500).json({ status: 'Fail', error: error.message })

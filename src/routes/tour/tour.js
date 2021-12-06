@@ -4,6 +4,7 @@ const { protect } = require('../../middleware/protect');
 const reviewRouter = require('../reviews/reviews');
 const { resizeTourImages } = require('../../utils/sharp');
 const { uploadTourImages } = require('../../utils/multer');
+const cleanCache = require('../../middleware/cleanCache');
 
 /** PARAM MIDDLEWARE */
 /** ------------------------------- */
