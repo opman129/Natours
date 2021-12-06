@@ -6,8 +6,9 @@ const { promisify } = require('util');
 client.hget = promisify(client.hget);
 
 /** Mongoose Queries for MongoDB 
- * exec references the built in protoype constructor
+ * exec references the built-in prototype constructor
  * function
+ * cache is the cache
 */
 const exec = mongoose.Query.prototype.exec;
 const cache = mongoose.Query.prototype.cache;
@@ -33,16 +34,16 @@ mongoose.Query.prototype.exec = async function () {
 
     if (cacheValue) {
         const doc = JSON.parse(cacheValue);
-        console.log(cacheValue);
+        // console.log(cacheValue);
 
         return Array.isArray(doc) 
             ? doc.map((d) => new this.model(d))
             : new this.model(doc)
     };
 
-    const result = await exec.apply(this, arguments);
-    console.log(result)
-    client.hset(this.hashKey, key, JSON.stringify(result), 'EX', 60 * 60 * 24);
+    let result = await exec.apply(this, arguments);
+    result = JSON.stringify(result);
+    client.hset(this.hashKey, key, result);
 
     return result;
 };

@@ -55,15 +55,18 @@ class TourController {
     /** Fetch A Tour */
     static async getTour (req, res, next) {
         try {
-            const query = { _id: req.params.tour_id };
-            const tour = await Tour.findOne(query, cache).populate('reviews', '_id review rating user -tour');
-            if(!tour) {
-                return errorHandler(404, "Tour with the given Id does not exist");
-            };
+            const query = { _id: req.params.tour_id }
+            const tour = await Tour.findOne(query)
+                .cache()
+                .populate('reviews', '_id review rating user tour');
+
+            if (!tour) 
+            return next(new AppError('Tour with the given Id not found'));
+
             const message = "Tour retrieved successfully";
             return responseHandler(res, tour, next, 200, message, 1);
         } catch (error) {
-            return res.status(400).json({ success: false, error: error.message });
+            return next(new AppError(error.message, error.statusCode));
         };
     };
 
@@ -81,7 +84,7 @@ class TourController {
 
             return responseHandler(res, tour, next, 200, message, 1);
         } catch (error) {
-            return res.status(400).json({ success: false, error: error.message });
+            return next(new AppError(error.message, error.statusCode));
         };
     };
 
