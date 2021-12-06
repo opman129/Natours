@@ -5,7 +5,7 @@ const { DateTime } = require('luxon');
 const ApiFeatures = require('../utils/ApiFeatures');
 const AppError = require('../utils/AppError');
 require('dotenv').config({ path: './.env' });
-const { cache, clearHash, exec } = require('../utils/redis');
+const { clearHash, exec } = require('../utils/redis');
 const agenda = require('../jobs/agenda');
 
 class TourController {
@@ -23,6 +23,7 @@ class TourController {
 
             agenda.schedule("in 1 minute", "fetchAllTours", { tour_id: tour._id })
 
+            clearHash(req.user._id);
             return responseHandler(res, tour, next, 201, message, 1);
         } catch (error) {
             return res.status(500).json({ status: 'Fail', error: error.message })
@@ -32,7 +33,7 @@ class TourController {
     /** Fetch All Tours */
     static async getTours (req, res, next) {
         try {
-            const features = new ApiFeatures(Tour.find().lean(), req.query, cache)
+            const features = new ApiFeatures(Tour.find().lean(), req.query)
                 .filter()
                 .sort()
                 .limit()
@@ -57,7 +58,7 @@ class TourController {
         try {
             const query = { _id: req.params.tour_id }
             const tour = await Tour.findOne(query)
-                .cache()
+                .cache({ key: req.user._id })
                 .populate('reviews', '_id review rating user tour');
 
             if (!tour) 

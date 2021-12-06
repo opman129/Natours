@@ -9,11 +9,11 @@ const { uploadTourImages } = require('../../utils/multer');
 /** ------------------------------- */
 
 router.route('/tours')
-    .post(Tour.createTour)
+    .post(protect, Tour.createTour)
     .get(protect, Tour.getTours)
 
 router.route('/tours/:tour_id')
-    .get(Tour.getTour)
+    .get(protect, Tour.getTour)
     .patch(protect, uploadTourImages, resizeTourImages, Tour.updateTour)
     .delete(Tour.deleteTour)
 

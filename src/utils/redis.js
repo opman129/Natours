@@ -11,7 +11,7 @@ client.hget = promisify(client.hget);
  * cache is the cache
 */
 const exec = mongoose.Query.prototype.exec;
-const cache = mongoose.Query.prototype.cache;
+// const cache = mongoose.Query.prototype.cache;
 
 mongoose.Query.prototype.cache = function (options = {}) {
     this.useCache = true;
@@ -41,9 +41,8 @@ mongoose.Query.prototype.exec = async function () {
             : new this.model(doc)
     };
 
-    let result = await exec.apply(this, arguments);
-    result = JSON.stringify(result);
-    client.hset(this.hashKey, key, result);
+    const result = await exec.apply(this, arguments);
+    client.hset(this.hashKey, key, JSON.stringify(result), 'EX', 60 * 60 * 24);
 
     return result;
 };
@@ -53,4 +52,4 @@ function clearHash(hashKey) {
     client.del(JSON.stringify(hashKey));
 };
 
-module.exports = { cache, exec, clearHash };
+module.exports = { exec, clearHash };
