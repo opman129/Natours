@@ -5,7 +5,10 @@ const client = redis.createClient(redisUrl);
 const { promisify } = require('util');
 client.hget = promisify(client.hget);
 
-/** Mongoose Queries for MongoDB */
+/** Mongoose Queries for MongoDB 
+ * exec references the built in protoype constructor
+ * function
+*/
 const exec = mongoose.Query.prototype.exec;
 const cache = mongoose.Query.prototype.cache;
 
@@ -15,11 +18,13 @@ mongoose.Query.prototype.cache = function (options = {}) {
     return this;
 };
 
+/** Query on exexute mongoose query */
 mongoose.Query.prototype.exec = async function () {
     if (!this.useCache) {
         return exec.apply(this, arguments);
     };
 
+    /** Assign a key and turn it to a string value */
     const key = JSON.stringify(Object.assign({}, this.getQuery, {
         collection: this.mongooseCollection.name
     }));
@@ -36,6 +41,7 @@ mongoose.Query.prototype.exec = async function () {
     };
 
     const result = await exec.apply(this, arguments);
+    console.log(result)
     client.hset(this.hashKey, key, JSON.stringify(result), 'EX', 60 * 60 * 24);
 
     return result;
