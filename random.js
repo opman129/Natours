@@ -76,4 +76,4 @@ console.log(parseInt(monthlyPayment(5000, 2, 10, 1)).toFixed(2));
     return(returnval);
 };
 
-console.log(toCurrency(50000000))
+console.log(toCurrency(50000000));

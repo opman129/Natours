@@ -1,6 +1,6 @@
 const redis = require('redis');
 const mongoose = require('mongoose');
-const redisUrl = 'redis://127.0.0.1:6379';
+const redisUrl = process.env.REDIS_URL;
 const client = redis.createClient(redisUrl);
 const { promisify } = require('util');
 client.hget = promisify(client.hget);
@@ -49,7 +49,7 @@ mongoose.Query.prototype.exec = async function () {
 
 /** Function to clear cached Items */
 function clearHash(hashKey) {
-    client.del(JSON.stringify(hashKey));
+    client.hdel(JSON.stringify(hashKey));
 };
 
 module.exports = { exec, clearHash };

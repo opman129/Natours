@@ -36,7 +36,7 @@ class AuthController {
             const user = await User.findOne({ email }).select('+password');
             const correct = await user.correctPassword(password, user.password);
             if (!user || !correct) {
-                return errorHandler(401, "Incorrect email or password")
+                return errorHandler(401, "Incorrect email or password");
             };
 
             const token = signToken({ id: user._id });
@@ -46,6 +46,7 @@ class AuthController {
             // })
 
             // console.log(res.cookie);
+
             const message = 'User successfully logged in';
             delete user.password;
             return res.status(200).json({
@@ -104,7 +105,7 @@ class AuthController {
 
             const message = 'User password reset successfully';
             const token = signToken({ id: user._id });
-            return responseHandler(res, token, next, 200, message, 1)
+            return responseHandler(res, token, next, 200, message, 1);
         } catch (error) {
             return res.status(400).json({ success: false, error: error.message });
         };
@@ -129,7 +130,7 @@ class AuthController {
             /** Log-in User and send JWT */
             const token = signToken({ id: user._id });
             const message = "User password changed successfully";
-            return res.status(200).json({ status: "success", message, token, user })
+            return res.status(200).json({ status: "success", message, token, user });
         } catch (error) {
             return res.status(400).json({ success: false, error: error.message });
         };
